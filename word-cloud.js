@@ -27,7 +27,7 @@ var visualization = function(visualization){
         visualization.update();
 
         window.onresize = function(event) {
-            visualization.update();
+            visualization.fetchData(true);
         };
     };
 
