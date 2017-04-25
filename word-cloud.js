@@ -1,3 +1,5 @@
+var API_URL="tags.json";
+
 var visualization = function(visualization){
     var max, fontSize, layout, svg,  vis, w, h
         , fill = d3.scale.category20b();
@@ -97,7 +99,7 @@ var visualization = function(visualization){
     return visualization;
 }(visualization || {});
 
-$.getJSON("tags.json").fail( function(d, textStatus, error) {
+$.getJSON(API_URL).fail( function(d, textStatus, error) {
             console.error("getJSON failed, status: " + textStatus + ", error: "+error)
         }).done(function(tags){
        visualization.init(tags);
