@@ -1,0 +1,22 @@
+{
+  "name": "wordcloud",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jakubjosef/wordcloud",
+  "authors": [
+    "Jakub Josef <jakub.josef@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2",
+    "d3-cloud": "~1.0.5",
+    "d3": "~3.4.11"
+  }
+}
