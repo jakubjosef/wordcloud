@@ -58,7 +58,7 @@ var visualization = function(visualization){
                 .duration(1000)
                 .style("opacity", 1);
         text.style("font-family", function(d) {
-            return d.font;
+                    return d.font;
                 })
                 .style("fill", function(d) {
                     return fill(d.text.toLowerCase());
@@ -93,7 +93,7 @@ var visualization = function(visualization){
             }
             // sort data by weight
             data.sort(function(a,b){
-               return a.weight - b.weight;
+               return b.weight - a.weight;
             });
             // slice to MAX_DATA
             data = data.slice(0, MAX_DATA)
