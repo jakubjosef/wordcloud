@@ -1,5 +1,7 @@
 var API_URL="tags.json"
- ,  REFRESH_INTERVAL=10;
+ ,  REFRESH_INTERVAL=10
+ ,  DATA_FIELD="popularity"
+ ,  MAX_DATA=50;
 
 var visualization = function(visualization){
     var data, layout, svg,  vis, w, h
@@ -84,11 +86,17 @@ var visualization = function(visualization){
         $.getJSON(API_URL).fail( function(d, textStatus, error) {
             console.error("getJSON failed, status: " + textStatus + ", error: "+error)
         }).done(function(res){
-            data = res;
+            if(DATA_FIELD){
+                data = res[DATA_FIELD];
+            }else{
+                data = res;
+            }
             // sort data by weight
             data.sort(function(a,b){
                return a.weight - b.weight;
             });
+            // slice to MAX_DATA
+            data = data.slice(0, MAX_DATA)
             // patch data weights
             var tagSize = 15
              , tagValue = 0;
