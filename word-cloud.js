@@ -1,4 +1,4 @@
-var API_URL="tags.json"
+var API_URL="http://10.0.175.90:32766/stats"
  ,  REFRESH_INTERVAL=10
  ,  DATA_FIELD="popularity"
  ,  MAX_DATA=50;
@@ -53,7 +53,7 @@ var visualization = function(visualization){
                 .style("font-size", function(d) {
                     return d.size + "px";
                 })
-                .style("opacity", 1e-6)
+                .style("opacity", 0)
                 .transition()
                 .duration(1000)
                 .style("opacity", 1);
@@ -97,15 +97,21 @@ var visualization = function(visualization){
             });
             // slice to MAX_DATA
             data = data.slice(0, MAX_DATA)
+            var maxWeight = 0
+             ,  minWeight = Infinity;
+            data.forEach(function(item){
+                if(item.weight > maxWeight){
+                    maxWeight = item.weight;
+                }
+                if(item.weight < minWeight){
+                    minWeight = item.weight;
+                }
+            });
             // patch data weights
-            var tagSize = 15
-             , tagValue = 0;
+            var maxSize = 250;
+            var minSize = 15;
             data.forEach(function(val){
-              if(tagValue != val.weight){
-                tagValue = val.weight;
-                tagSize = tagSize + 5
-              }
-              val.size = tagSize;
+                val.size = ((val.weight - minWeight) / maxWeight) * maxSize + minSize;
             });
             if(typeof makeUpdate === 'boolean' && makeUpdate){
                 visualization.update();
